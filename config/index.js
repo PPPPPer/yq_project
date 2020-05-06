@@ -3,18 +3,39 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+// 导入前后端配置
+const debug = require('./debug.json')
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    // 只有本地有用，线上没用（webpack的
+      proxyTable: {
+        '/api': {
+          target: 'http://localhost:8080/',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        }
+      },
+    //这是vue跨域的，其实上下二选一就行
+    devServer: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8080/',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        }
+      }
+    },
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: debug.dev.host, // can be overwritten by process.env.HOST
+    port: debug.dev.port, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,

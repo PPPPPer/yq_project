@@ -2,6 +2,7 @@
   <div class="main">
     <div class="header">
       <div class="title-name">新型冠状病毒肺炎</div>
+      <button @click="jump" class="jump-button">跳到可视化大屏展示</button>
     </div>
     <div class="container">
       <div id="map">
@@ -28,6 +29,9 @@
       this.getLinearMap();
     },
     methods: {
+      jump() {
+        this.$router.push('/map')
+      },
       getLinearMap() {
         let map = this.$echarts.init(document.getElementById('linear'))
         var xData = function() {
@@ -67,16 +71,6 @@
               color: "#fff"
             }
           },
-          // legend: {
-          //   x: '70%',
-          //   top: '11%',
-          //   textStyle: {
-          //     color: 'gainsboro',
-          //   },
-          //   data: ['预测数']
-          // },
-
-
           calculable: true,
           xAxis: [{
             type: "category",
@@ -472,8 +466,6 @@
 
             timeline: {
               axisType: 'category',
-              // realtime: false,
-              // loop: false,
               autoPlay: true,
               playInterval: 2000,
               symbolSize: 12,
@@ -481,9 +473,6 @@
               right: '5%',
               bottom: '0%',
               width: '90%',
-              // controlStyle: {
-              //     position: 'left'
-              // },
               data: days,
               tooltip: {
                 formatter: days
@@ -728,7 +717,7 @@
 <style scoped rel="stylesheet/stylus" lang="stylus">
   .main
     max-width 768px /* 768px是ipad的宽度 */
-    padding-top 45px
+    /*padding-top 5px*/
     height 100%
     margin 0 auto
     background-color #10aeb5
@@ -758,4 +747,12 @@
     border 15px solid white
     box-sizing border-box
     border-radius: 15px
+  .jump-button
+    background transparent
+    border none
+    padding-top 10px
+    color: #afdade
+    font-weight 800
+    line-height: 1.5em;
+    font-family: "Times New Roman", Times, serif;
 </style>

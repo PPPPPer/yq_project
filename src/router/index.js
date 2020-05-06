@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../view/Main/Main.vue'
+import Homepage from '../view/Main/Homepage.vue'
 // 声明使用插件
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -12,6 +13,10 @@ export default new VueRouter({
     {
       path: '/',
       component: Main
+    },
+    {
+      path: '/map',
+      component: Homepage
     }
   ]
 })
